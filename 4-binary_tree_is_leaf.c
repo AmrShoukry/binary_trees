@@ -4,7 +4,7 @@
  * binary_tree_is_leaf - a function that checks if a node is a leaf
  * @node: is a pointer to the node to check
  *
- * Return: return 1 if node is a leaf, otherwise 0
+ * Return: return 1 if node is a leaf, otherwise 0 If node is NULL, return 0
  */
 
 
