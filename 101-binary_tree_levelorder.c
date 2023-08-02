@@ -36,6 +36,8 @@ size_t binary_tree_size(const binary_tree_t *tree)
 
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
+	(void)tree;
+	(void)func;
 	return;
 }
 
