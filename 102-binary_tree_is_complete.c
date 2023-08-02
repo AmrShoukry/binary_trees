@@ -79,23 +79,25 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
-
 	new_queue = malloc(sizeof(queue));
-
 	if (new_queue == NULL)
 		return (0);
-
 	new_queue->front = NULL;
 	new_queue->rear = NULL;
 	root = (binary_tree_t *) tree;
-
 	enqueue(new_queue, tree);
-
 	while (root != NULL)
 	{
 		if ((flag >= 1 && root->left != NULL) ||
 			(root->left == NULL && root->right != NULL))
 		{
+			while (root != new_queue->rear)
+			{
+				new_queue->front = root->parent;
+				free(root);
+				root = new_queue->front;
+			}
+			free(root);
 			free(new_queue);
 			return (0);
 		}
