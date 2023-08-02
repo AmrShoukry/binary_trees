@@ -82,11 +82,17 @@ void remove_node_with_zero_one_child(bst_t *node, bst_t *child, bst_t *parent)
 bst_t *bst_remove(bst_t *root, int value)
 {
 	bst_t *parent;
-	bst_t *to_remove = bst_search(root, value);
+	bst_t *to_remove;
 	bst_t *smallest;
+
+	if (root == NULL)
+		return (NULL);
+
+	to_remove = bst_search(root, value);
 
 	if (to_remove == NULL)
 		return (NULL);
+
 
 	parent = to_remove->parent;
 
