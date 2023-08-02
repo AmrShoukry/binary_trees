@@ -37,13 +37,15 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	int front = 0;
 	int rear = 0;
+	int size;
+
 	binary_tree_t *node = (binary_tree_t *)tree;
 
 	if (tree == NULL)
 		return (0);
 
-	int size = binary_tree_size(tree);
-	binary_tree_t *array[1024];
+	size = binary_tree_size(tree);
+	binary_tree_t *array[size];
 
 	array[0] = node;
 
