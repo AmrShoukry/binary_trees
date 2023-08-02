@@ -1,28 +1,67 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_size - a function that measures the size of a binary tree
- * @tree: is a pointer to the root node of the tree to measure the size
+ * enqueue - a function that enqueue a new element
+ * @my_queue: is a pointer to the queue
+ * @node: the new node
  *
- * Return: a binary tree size, If tree is NULL, your function must return 0
+ * Return: Nothing
  */
 
-
-size_t binary_tree_size(const binary_tree_t *tree)
+void enqueue(queue *my_queue, const binary_tree_t *node)
 {
-	size_t size = 1;
+	binary_tree_t *new_node;
 
-	if (tree == NULL)
-		return (0);
+	if (node == NULL)
+		return;
 
-	if (tree->left != NULL)
-		size += binary_tree_size(tree->left);
+	new_node = malloc(sizeof(binary_tree_t));
 
-	if (tree->right != NULL)
-		size += binary_tree_size(tree->right);
+	if (new_node == NULL)
+		return;
 
-	return (size);
+	new_node->parent = NULL;
+	new_node->left = node->left;
+	new_node->right = node->right;
+	new_node->n = node->n;
+
+	if (my_queue->front == NULL && my_queue->rear == NULL)
+		my_queue->front = my_queue->rear = new_node;
+
+	else
+	{
+		my_queue->rear->parent = new_node;
+		my_queue->rear = new_node;
+	}
 }
+
+
+
+/**
+ * dequeue - a function that dequeue the front element
+ * @my_queue: is a pointer to the queue
+ *
+ * Return: removed element
+ */
+
+binary_tree_t *dequeue(queue *my_queue)
+{
+	binary_tree_t *old;
+
+	if (my_queue->front == NULL && my_queue->rear == NULL)
+		return (NULL);
+
+	old = my_queue->front;
+
+	if (my_queue->front == my_queue->rear)
+		my_queue->front = my_queue->rear = NULL;
+
+	else
+		my_queue->front = my_queue->front->parent;
+
+	return (old);
+}
+
 
 
 /**
@@ -34,36 +73,45 @@ size_t binary_tree_size(const binary_tree_t *tree)
 
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int front = 0;
-	int rear = 0;
-	binary_tree_t *node = (binary_tree_t *)tree;
+	queue *new_queue;
+	binary_tree_t *root;
+	int flag = 0;
 
 	if (tree == NULL)
 		return (0);
-
-	int size = binary_tree_size(tree);
-	binary_tree_t *array[size];
-
-	array[0] = node;
-
-	while (rear >= front)
+	new_queue = malloc(sizeof(queue));
+	if (new_queue == NULL)
+		return (0);
+	new_queue->front = NULL;
+	new_queue->rear = NULL;
+	root = (binary_tree_t *) tree;
+	enqueue(new_queue, tree);
+	while (root != NULL)
 	{
-		if (node->left != NULL)
-			array[++rear] = node->left;
-
-		if (node->right != NULL)
-			array[++rear] = node->right;
-
-		if (node->right != NULL && node->left == NULL)
+		if ((flag >= 1 && root->left != NULL) ||
+			(root->left == NULL && root->right != NULL))
+		{
+			while (root != new_queue->rear)
+			{
+				new_queue->front = root->parent;
+				free(root);
+				root = new_queue->front;
+			}
+			free(root);
+			free(new_queue);
 			return (0);
+		}
 
-		if (node->left != NULL && node->right == NULL && rear != size - 1)
-			return (0);
+		if (root->left != NULL && root->right == NULL)
+			flag++;
 
-		front++;
-		node = array[front];
+		enqueue(new_queue, root->left);
+		enqueue(new_queue, root->right);
+		root = dequeue(new_queue);
+		free(root);
+		root = new_queue->front;
 	}
-
+	free(new_queue);
 	return (1);
 }
 
