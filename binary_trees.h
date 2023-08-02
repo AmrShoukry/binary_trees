@@ -66,4 +66,7 @@ int binary_tree_preorder_check_left(const binary_tree_t *tree, int value);
 int binary_tree_preorder_check_right(const binary_tree_t *tree, int value);
 size_t binary_tree_height_adjusted(const binary_tree_t *tree);
 
+
+int binary_tree_is_heap(const binary_tree_t *tree);
+
 #endif
