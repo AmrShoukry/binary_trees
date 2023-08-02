@@ -54,7 +54,8 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -89,7 +90,8 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3
 			]
 		}
 	],
@@ -98,7 +100,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main.c",
+			"path" : "0-binary_tree_node.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -111,6 +113,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "binary_tree_print.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "120-binary_tree_is_avl.c",
 			"sourceGroupIndex" : 0
 		}
 	],

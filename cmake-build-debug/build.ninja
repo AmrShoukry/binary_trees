@@ -49,8 +49,8 @@ cmake_ninja_workdir = /home/vboxuser/binary_trees/cmake-build-debug/
 
 build cmake_object_order_depends_target_binary_trees: phony || CMakeFiles/binary_trees.dir
 
-build CMakeFiles/binary_trees.dir/main.c.o: C_COMPILER__binary_trees_Debug /home/vboxuser/binary_trees/main.c || cmake_object_order_depends_target_binary_trees
-  DEP_FILE = CMakeFiles/binary_trees.dir/main.c.o.d
+build CMakeFiles/binary_trees.dir/0-binary_tree_node.c.o: C_COMPILER__binary_trees_Debug /home/vboxuser/binary_trees/0-binary_tree_node.c || cmake_object_order_depends_target_binary_trees
+  DEP_FILE = CMakeFiles/binary_trees.dir/0-binary_tree_node.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu90
   OBJECT_DIR = CMakeFiles/binary_trees.dir
   OBJECT_FILE_DIR = CMakeFiles/binary_trees.dir
@@ -67,6 +67,12 @@ build CMakeFiles/binary_trees.dir/binary_tree_print.c.o: C_COMPILER__binary_tree
   OBJECT_DIR = CMakeFiles/binary_trees.dir
   OBJECT_FILE_DIR = CMakeFiles/binary_trees.dir
 
+build CMakeFiles/binary_trees.dir/120-binary_tree_is_avl.c.o: C_COMPILER__binary_trees_Debug /home/vboxuser/binary_trees/120-binary_tree_is_avl.c || cmake_object_order_depends_target_binary_trees
+  DEP_FILE = CMakeFiles/binary_trees.dir/120-binary_tree_is_avl.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu90
+  OBJECT_DIR = CMakeFiles/binary_trees.dir
+  OBJECT_FILE_DIR = CMakeFiles/binary_trees.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target binary_trees
@@ -75,7 +81,7 @@ build CMakeFiles/binary_trees.dir/binary_tree_print.c.o: C_COMPILER__binary_tree
 #############################################
 # Link the executable binary_trees
 
-build binary_trees: C_EXECUTABLE_LINKER__binary_trees_Debug CMakeFiles/binary_trees.dir/main.c.o CMakeFiles/binary_trees.dir/120-main.c.o CMakeFiles/binary_trees.dir/binary_tree_print.c.o
+build binary_trees: C_EXECUTABLE_LINKER__binary_trees_Debug CMakeFiles/binary_trees.dir/0-binary_tree_node.c.o CMakeFiles/binary_trees.dir/120-main.c.o CMakeFiles/binary_trees.dir/binary_tree_print.c.o CMakeFiles/binary_trees.dir/120-binary_tree_is_avl.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/binary_trees.dir
   POST_BUILD = :

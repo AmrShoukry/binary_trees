@@ -9,7 +9,7 @@ int binary_tree_is_avl(const binary_tree_t *tree)
 {
 	if (tree == NULL)
 		return (0);
-	return isBalancedAvl(tree);
+	return (isBalancedAvl(tree));
 }
 
 /**
@@ -37,13 +37,13 @@ int isBalancedAvl(const binary_tree_t *tree)
 
 	if (tree->left != NULL)
 	{
-		leftHeight = (int)binary_tree_height(tree->left);
+		leftHeight = (int)binary_tree_height_adjusted(tree->left);
 		if (!binary_tree_preorder_check_left(tree->left, tree->n))
 			return (0);
 	}
 	if (tree->right != NULL)
 	{
-		rightHeight = (int)binary_tree_height(tree->right);
+		rightHeight = (int)binary_tree_height_adjusted(tree->right);
 		if (!binary_tree_preorder_check_right(tree->right, tree->n))
 			return (0);
 	}
@@ -59,12 +59,12 @@ int isBalancedAvl(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_preorder - a function that goes through a binary tree using
+ * binary_tree_preorder_check_left - a function
+ * that goes through a binary tree using
  *                        pre-order traversal
  *                        checking if any value is bigger than the value given.
  * @tree: is a pointer to the root node of the tree to traverse
- * @func: is a pointer to a function to call for each node.
- *        The value in the node must be passed as a parameter to this function.
+ * @value: the value to check
  *
  * Return: Nothing
  */
@@ -86,12 +86,12 @@ int binary_tree_preorder_check_left(const binary_tree_t *tree, int value)
 }
 
 /**
- * binary_tree_preorder - a function that goes through a binary tree using
- *                        pre-order traversal
- *                        checking if any value is smaller than the value given.
+ * binary_tree_preorder_check_right - a function that goes through
+ * a binary tree using
+ * pre-order traversal
+ * checking if any value is smaller than the value given
  * @tree: is a pointer to the root node of the tree to traverse
- * @func: is a pointer to a function to call for each node.
- *        The value in the node must be passed as a parameter to this function.
+ * @value: the value to check
  *
  * Return: Nothing
  */
@@ -113,24 +113,25 @@ int binary_tree_preorder_check_right(const binary_tree_t *tree, int value)
 }
 
 /**
- * binary_tree_height - a function that measures the height of a binary tree
+ * binary_tree_height_adjusted - a function that measures
+ * the height of a binary tree + 1
  * @tree: is a pointer to the root node of the tree to measure the height.
  *
  * Return: a binary tree height, If tree is NULL, your function must return 0
  */
-size_t binary_tree_height(const binary_tree_t *tree)
+size_t binary_tree_height_adjusted(const binary_tree_t *tree)
 {
-	size_t left = 0;
-	size_t right = 0;
+	size_t left = 1;
+	size_t right = 1;
 
 	if (tree == NULL)
 		return (0);
 
 	if (tree->left != NULL)
-		left = (1 + binary_tree_height(tree->left));
+		left = (1 + binary_tree_height_adjusted(tree->left));
 
 	if (tree->right != NULL)
-		right = (1 + binary_tree_height(tree->right));
+		right = (1 + binary_tree_height_adjusted(tree->right));
 
 	if (left > right)
 		return (left);
