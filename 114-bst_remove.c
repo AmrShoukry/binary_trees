@@ -55,7 +55,7 @@ bst_t *bst_search(const bst_t *tree, int value)
  */
 
 
-void remove_node_with_zero_one_child(bst_t *node, bst_t *child, bst_t *parent, bst_t **root)
+void remove_node_with_zero_one_child(bst_t *node, bst_t *child, bst_t *parent)
 {
 	if (parent != NULL)
 	{
@@ -66,9 +66,6 @@ void remove_node_with_zero_one_child(bst_t *node, bst_t *child, bst_t *parent, b
 	}
 	if (child != NULL)
 		child->parent = parent;
-	
-	if (node == *root)
-		*root = child;
 	free(node);
 }
 
@@ -100,13 +97,13 @@ bst_t *bst_remove(bst_t *root, int value)
 	parent = to_remove->parent;
 
 	if (to_remove->left == NULL && to_remove->right == NULL)
-		remove_node_with_zero_one_child(to_remove, NULL, parent, &root);
+		remove_node_with_zero_one_child(to_remove, NULL, parent);
 
 	else if (to_remove->left == NULL && to_remove->right != NULL)
-		remove_node_with_zero_one_child(to_remove, to_remove->right, parent, &root);
+		remove_node_with_zero_one_child(to_remove, to_remove->right, parent);
 
 	else if (to_remove->left != NULL && to_remove->right == NULL)
-		remove_node_with_zero_one_child(to_remove, to_remove->left, parent, &root);
+		remove_node_with_zero_one_child(to_remove, to_remove->left, parent);
 
 	else if (to_remove->left != NULL && to_remove->right != NULL)
 	{
