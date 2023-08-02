@@ -1,6 +1,4 @@
 #include "binary_trees.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
  * binary_tree_is_avl - checks if a tree is a valid avl tree
@@ -9,23 +7,109 @@
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
+	if (tree == NULL)
+		return (0);
+	return isBalancedAvl(tree);
+}
+
+/**
+ * isBalancedAvl - checks if a tree is a valid avl tree
+ * @tree: the tree to check
+ * Return: 1 if valid AVL tree, 0 otherwise
+ */
+int isBalancedAvl(const binary_tree_t *tree)
+{
 	int leftHeight = 0;
 	int rightHeight = 0;
 	int difference;
+	int isBalanced;
+	int isBalancedRight = 1;
+	int isBalancedLeft = 1;
+	int finalBalance;
 
 	if (tree == NULL)
+		return (1);
+
+	if (tree->left != NULL && tree->n < tree->left->n)
+		return (0);
+	if (tree->right != NULL && tree->n > tree->right->n)
 		return (0);
 
 	if (tree->left != NULL)
+	{
 		leftHeight = (int)binary_tree_height(tree->left);
+		if (!binary_tree_preorder_check_left(tree->left, tree->n))
+			return (0);
+	}
 	if (tree->right != NULL)
+	{
 		rightHeight = (int)binary_tree_height(tree->right);
+		if (!binary_tree_preorder_check_right(tree->right, tree->n))
+			return (0);
+	}
 
 	difference = leftHeight - rightHeight;
+	isBalanced = !(difference >= 2 || difference <= -2);
+	if (tree->left != NULL)
+		isBalancedLeft = isBalancedAvl(tree->left);
+	if (tree->right != NULL)
+		isBalancedRight = isBalancedAvl(tree->right);
+	finalBalance = isBalanced && isBalancedRight && isBalancedLeft;
+	return (finalBalance);
+}
 
-	if (difference >= 2 || difference <= -2)
+/**
+ * binary_tree_preorder - a function that goes through a binary tree using
+ *                        pre-order traversal
+ *                        checking if any value is bigger than the value given.
+ * @tree: is a pointer to the root node of the tree to traverse
+ * @func: is a pointer to a function to call for each node.
+ *        The value in the node must be passed as a parameter to this function.
+ *
+ * Return: Nothing
+ */
+int binary_tree_preorder_check_left(const binary_tree_t *tree, int value)
+{
+	int leftCheck;
+	int rightCheck;
+
+	if (tree == NULL)
+		return (1);
+
+	if (tree->left != NULL && tree->left->n > value)
 		return (0);
-	return (1);
+	if (tree->right != NULL && tree->right->n > value)
+		return (0);
+	leftCheck = binary_tree_preorder_check_left(tree->left, value);
+	rightCheck = binary_tree_preorder_check_left(tree->right, value);
+	return (leftCheck && rightCheck);
+}
+
+/**
+ * binary_tree_preorder - a function that goes through a binary tree using
+ *                        pre-order traversal
+ *                        checking if any value is smaller than the value given.
+ * @tree: is a pointer to the root node of the tree to traverse
+ * @func: is a pointer to a function to call for each node.
+ *        The value in the node must be passed as a parameter to this function.
+ *
+ * Return: Nothing
+ */
+int binary_tree_preorder_check_right(const binary_tree_t *tree, int value)
+{
+	int leftCheck;
+	int rightCheck;
+
+	if (tree == NULL)
+		return (1);
+
+	if (tree->left != NULL && tree->left->n < value)
+		return (0);
+	if (tree->right != NULL && tree->right->n < value)
+		return (0);
+	leftCheck = binary_tree_preorder_check_right(tree->left, value);
+	rightCheck = binary_tree_preorder_check_right(tree->right, value);
+	return (leftCheck && rightCheck);
 }
 
 /**
