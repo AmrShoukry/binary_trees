@@ -93,7 +93,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 
 	while (root != NULL)
 	{
-		if ((flag == 1 && root->left != NULL) ||
+		if ((flag >= 1 && root->left != NULL) ||
 			(root->left == NULL && root->right != NULL))
 		{
 			free(new_queue);
