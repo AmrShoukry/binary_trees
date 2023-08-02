@@ -47,6 +47,7 @@ size_t binary_tree_nodes(const binary_tree_t *tree);
 int binary_tree_balance(const binary_tree_t *tree);
 int binary_tree_is_full(const binary_tree_t *tree);
 int binary_tree_is_perfect(const binary_tree_t *tree);
+
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
@@ -65,7 +66,10 @@ int isBalancedAvl(const binary_tree_t *tree);
 int binary_tree_preorder_check_left(const binary_tree_t *tree, int value);
 int binary_tree_preorder_check_right(const binary_tree_t *tree, int value);
 size_t binary_tree_height_adjusted(const binary_tree_t *tree);
-
+/*31*/
+avl_t *avl_insert(avl_t **tree, int value);
+avl_t *findInsertionLocation(avl_t **tree, int value);
+avl_t *avl_insert_node(avl_t *tree, avl_t *node, avl_t *parent);
 
 int binary_tree_is_heap(const binary_tree_t *tree);
 
