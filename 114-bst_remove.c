@@ -64,7 +64,8 @@ void remove_node_with_zero_one_child(bst_t *node, bst_t *child, bst_t *parent)
 		else if (parent->right == node)
 			parent->right = child;
 	}
-	child->parent = parent;
+	if (child != NULL)
+		child->parent = parent;
 	free(node);
 }
 
