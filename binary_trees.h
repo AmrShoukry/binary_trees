@@ -84,5 +84,6 @@ avl_t *avl_insert_node(avl_t *tree, avl_t *node, avl_t *parent);
 
 int binary_tree_is_heap(const binary_tree_t *tree);
 heap_t *heap_insert(heap_t **root, int value);
+heap_t *array_to_heap(int *array, size_t size);
 
 #endif
