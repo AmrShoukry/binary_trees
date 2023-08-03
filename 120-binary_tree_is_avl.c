@@ -72,6 +72,7 @@ int binary_tree_preorder_check_left(const binary_tree_t *tree, int value)
 {
 	int leftCheck;
 	int rightCheck;
+	int balanceCheck;
 
 	if (tree == NULL)
 		return (1);
