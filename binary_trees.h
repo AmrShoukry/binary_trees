@@ -32,6 +32,8 @@ struct queue_s
 {
 	struct binary_tree_s *front;
 	struct binary_tree_s *rear;
+	struct binary_tree_s *left;
+	struct binary_tree_s *right;
 };
 
 typedef struct queue_s queue;
@@ -77,5 +79,6 @@ size_t binary_tree_height_adjusted(const binary_tree_t *tree);
 
 
 int binary_tree_is_heap(const binary_tree_t *tree);
+heap_t *heap_insert(heap_t **root, int value);
 
 #endif
